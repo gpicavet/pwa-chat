@@ -7,7 +7,7 @@
   "main": "server/app.js",
   "scripts": {
     "test": "tape server/*.test.js",
-    "copy": "cp client/index.html dist/index.html",
+    "copy": "mkdir -p dist && cp client/index.html dist/index.html",
     "server": "nodemon server/app.js --exec babel-node --presets es2015,stage-1",
     "watchify": "watchify client/App.jsx --s App -p [css-modulesify --after autoprefixer --autoprefixer.browsers \"> 5%\" -o dist/app.css] -t [ babelify --presets [env stage-1 react] ] -o dist/app.js -dv",
     "browserify": "browserify client/App.jsx --s App -p [css-modulesify  --after autoprefixer --autoprefixer.browsers \"> 5%\" -o dist/app.css] -t [ babelify --presets [env stage-1 react] ] | uglifyjs --screw-ie8 -c=dead_code,evaluate,loops,unused > dist/app.js"
