@@ -4,8 +4,13 @@ import PropTypes from 'prop-types';
 import { Router, Route, Link, browserHistory } from 'react-router'
 import {Channel} from './Channel.jsx';
 import {About} from './About.jsx';
+import {Login} from './Login.jsx';
 
 export class App extends React.Component {
+
+  static contextTypes = {
+      router: PropTypes.object.isRequired
+  }
 
     constructor(props) {
         super(props);
@@ -13,26 +18,19 @@ export class App extends React.Component {
     }
 
     componentDidMount() {
-      fetch("/auth", {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json"
-          },
-          credentials: 'same-origin',
-          body: JSON.stringify({
-              email: "gpicavet@gmail.com",
-              password: "pass"
-          })
-      }).then(() => {
-          return fetch("/secured/channel", {
+      fetch("/secured/channel", {
             credentials: 'same-origin'
-          })
-          .then((res) => {
-              return res.json();
-          }).then((json) => {
-              this.setState({channels : json.channels});
-          })
-      }).then(() => {
+      })
+      .then((res) => {
+        if(res.status == 401) {
+          throw "Unauthorized";
+        } else {
+          return res.json();
+        }
+      }).then((json) => {
+          this.setState({channels : json.channels});
+      })
+      .then(() => {
 
         this.webSocket = new WebSocket("ws://localhost:3000");
         this.webSocket.onerror = (error) => {
@@ -44,6 +42,8 @@ export class App extends React.Component {
             this.webSocket.send(""+Math.random() );
           }, 2000 );
         };
+      }).catch((err) => {
+        this.context.router.push("/login");
       });
 
     }
@@ -68,6 +68,7 @@ ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       <Route path="about" component={About} />
+      <Route path="login" exact component={Login} />
       <Route path="channel/:id" component={Channel} />
     </Route>
   </Router>

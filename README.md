@@ -1,5 +1,5 @@
 # pwa-chat
-A modern chat app with node.js server (express), mongodb database, websockets communication (socket.io), JWT authentication, React.js frontend and Service-Worker cache---
+A modern chat app built on node.js (express), websockets, JWT authentication, a React.js frontend and Service-Worker for offline usage ---
 
 # build 
 npm install
