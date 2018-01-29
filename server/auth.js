@@ -14,7 +14,6 @@ var db = null;
 
 module.exports = function() {
     var strategy = new Strategy(params, (payload, done) => {
-        console.log("aaa");
         db.collection("users").findOne({id:payload.id}).then((user) => {
 
         if (user) {

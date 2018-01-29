@@ -39,9 +39,9 @@ self.addEventListener('fetch', (e) => {
 
             console.log("sw ["+cacheName+"] fetch from network : "+e.request.url);
             return fetch(e.request).catch( err => {
-              if(e.request.url.indexOf("/rest/v1/social/activities")>=0) {
+              if(e.request.url.indexOf("/secured/room/")>=0) {
                 return getDB().then(db => {
-                  return db.transaction("activities").objectStore("activities").getAll().then(all=> {
+                  return db.transaction("rooms").objectStore("rooms").getAll().then(all=> {
                     console.log("sw ["+cacheName+"] returning result from DB");
                     return new Response(JSON.stringify({activities:all}), {
                       headers: {"Content-type" :"application/json"}
