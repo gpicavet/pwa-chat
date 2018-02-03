@@ -1,4 +1,26 @@
+
+.box {
+  margin: 0.5em;
+  width: 100%;
+  list-style-type: none;
+}
+
+.user {
+    font-weight: bold;
+    font-size: 1em ;
+    color: #2f343d;
+    padding:0.5em;
+}
+
+.time {
+  font-size: 0.7em ;
+  color:#aaa;
+}
+
+.text {
+  padding:0.5em;
+}
+
 img {
-  width: 64px;
-  height: 64px;
+  width: 32px;
 }

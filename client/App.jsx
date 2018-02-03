@@ -5,6 +5,7 @@ import { Router, Route, Link, browserHistory } from 'react-router'
 import {Channel} from './Channel.jsx';
 import {About} from './About.jsx';
 import {Login} from './Login.jsx';
+import Styles from './App.css';
 
 export class App extends React.Component {
 
@@ -53,11 +54,17 @@ export class App extends React.Component {
             const link="/channel/"+c.id;
             return <li key={c.id}><Link to={link}>{c.title}</Link></li>
         });
-        return (<div>
-          <Link to="/about">About</Link>
-          <ul>{list}</ul>
-          {this.props.children}
-        </div>);
+        return (
+          <div>
+            <div className={Styles.nav}>
+              <Link to="/about">About</Link>
+              <h3>Channels</h3>
+              <ul>{list}</ul>
+            </div>
+            <div className={Styles.page}>
+              {this.props.children}
+            </div>
+          </div>);
     }
 
 }

@@ -1,24 +1,25 @@
 import React from 'react';
 import Styles from './Message.css';
-const moment = require('moment');
 
 export const Message = (props) => {
 
-      const titleHtml = {__html:props.text};
-      const avatarUrl="/secured/users/"+props.user.id+"/avatar";
-      return (
-          <li>
-            <div>
-              <img src={avatarUrl} />
-            </div>
-            <div>
-              <p>
-                <strong>{props.user.fullname}</strong>
-                <br/>
-                Posted : <span>{moment(new Date(props.date)).fromNow()}</span>
-                <br/>
-              </p>
-              <div dangerouslySetInnerHTML={titleHtml}/>
-            </div>
-          </li>);
+  const date = new Date(props.date);
+  const titleTime = date.toLocaleDateString()+" "+date.toLocaleTimeString();
+  const textHtml = {__html:props.text};
+  const avatarUrl="/secured/users/"+props.user.id+"/avatar";
+  return (
+      <li className={Styles.box}>
+        <div style={{display:'inline-block'}}>
+          <img src={avatarUrl} />
+        </div>
+        <div style={{display:'inline-block', padding:'0.5em'}}>
+          <span className={Styles.user} >
+            {props.user.fullname}
+          </span>
+          <span className={Styles.time} title={titleTime}>
+            {date.toLocaleTimeString()}
+          </span>
+          <div className={Styles.text} dangerouslySetInnerHTML={textHtml}/>
+        </div>
+      </li>);
 }

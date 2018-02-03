@@ -52,14 +52,14 @@ export class Login extends React.Component {
           name="email"
           type="email"
           placeholder="Email"
-          value={this.state.email}
+          value={this.state.form_email}
           onChange={this.handleChange}></input>
         <input
           id="form_password"
           name="password"
           type="password"
           placeholder="Password"
-          value={this.state.password}
+          value={this.state.form_password}
           onChange={this.handleChange}></input>
         <button type="submit"
           disabled={!this.validateForm()}>Validate</button>

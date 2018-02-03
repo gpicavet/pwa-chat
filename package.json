@@ -18,7 +18,6 @@
     "express": "^4.15.2",
     "idb": "^2.0.0",
     "jsonwebtoken": "^8.1.1",
-    "moment": "^2.18.0",
     "mongodb": "^2.2.24",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
