@@ -9,8 +9,10 @@
     "test": "tape server/*.test.js",
     "copy": "mkdir -p dist && cp client/index.html dist/index.html",
     "server": "nodemon server/app.js --exec babel-node --presets es2015,stage-1",
+    "dts": "tcm client -o client-gen",
     "watchify": "watchify client/App.jsx --s App -p [css-modulesify --after autoprefixer --autoprefixer.browsers \"> 5%\" -o dist/app.css] -t [ babelify --presets [env stage-1 react] ] -o dist/app.js -dv",
-    "browserify": "browserify client/App.jsx --s App -p [css-modulesify  --after autoprefixer --autoprefixer.browsers \"> 5%\" -o dist/app.css] -t [ babelify --presets [env stage-1 react] ] | uglifyjs --screw-ie8 -c=dead_code,evaluate,loops,unused > dist/app.js"
+    "browserify": "browserify client/App.tsx --s App -p [css-modulesify  --after autoprefixer --autoprefixer.browsers \"> 5%\" -o dist/app.css] -p [tsify --noImplicitAny] | uglifyjs --screw-ie8 -c=dead_code,evaluate,loops,unused > dist/app.js",
+    "build": "npm run copy && npm run dts && npm run browserify"
   },
   "dependencies": {
     "body-parser": "^1.17.1",
@@ -26,6 +28,11 @@
     "ws": "^4.0.0"
   },
   "devDependencies": {
+    "@types/prop-types": "^15.5.2",
+    "@types/react": "^16.0.0",
+    "@types/react-dom": "^16.0.0",
+    "@types/react-router": "^3.0.0",
+    "@types/ws": "^4.0.0",
     "autoprefixer": "^7.2.5",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
@@ -38,6 +45,9 @@
     "nodemon": "^1.14.11",
     "serve": "^6.4.1",
     "tape": "^4.8.0",
+    "tsify": "^3.0.4",
+    "typed-css-modules": "^0.1.6",
+    "typescript": "^2.7.1",
     "watchify": "^3.9.0"
   }
 }

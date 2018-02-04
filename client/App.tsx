@@ -1,21 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
-import { Router, Route, Link, browserHistory } from 'react-router'
-import {Channel} from './Channel.jsx';
-import {About} from './About.jsx';
-import {Login} from './Login.jsx';
-import Styles from './App.css';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import * as PropTypes from 'prop-types';
+import { Router, Route, Link, browserHistory } from 'react-router';
 
-export class App extends React.Component {
+import {Channel} from './Channel';
+import {About} from './About';
+import {Login} from './Login';
+import * as Styles from './App.css';
+
+export class App extends React.Component<any,any> {
+
+  webSocket:WebSocket = null;
 
   static contextTypes = {
       router: PropTypes.object.isRequired
   }
 
-    constructor(props) {
+    constructor(props:any) {
         super(props);
-        this.state = {channels:[]};
+        this.state = {channels: []};
     }
 
     componentDidMount() {
@@ -50,7 +53,7 @@ export class App extends React.Component {
     }
 
     render() {
-        const list = this.state.channels.map((c) => {
+        const list = this.state.channels.map((c:any) => {
             const link="/channel/"+c.id;
             return <li key={c.id}><Link to={link}>{c.title}</Link></li>
         });
@@ -75,7 +78,7 @@ ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       <Route path="about" component={About} />
-      <Route path="login" exact component={Login} />
+      <Route path="login" component={Login} />
       <Route path="channel/:id" component={Channel} />
     </Route>
   </Router>

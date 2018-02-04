@@ -1,7 +1,7 @@
-import React from 'react';
-import Styles from './Message.css';
+import * as React from 'react';
+import * as Styles from './Message.css';
 
-export const Message = (props) => {
+export const Message: React.SFC<{date: number, text:string, user:any}> = (props) => {
 
   const date = new Date(props.date);
   const titleTime = date.toLocaleDateString()+" "+date.toLocaleTimeString();

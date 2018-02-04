@@ -1,11 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {Message} from './Message.jsx';
-import Styles from './Channel.css';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 
-export class Channel extends React.Component {
+import {Message} from './Message';
+import * as Styles from './Channel.css';
 
-    constructor(props) {
+export class Channel extends React.Component<any,any> {
+
+    constructor(props: any) {
         super(props);
         this.state = {
             users: [],
@@ -24,7 +25,7 @@ export class Channel extends React.Component {
             });
     }
 
-    componentWillReceiveProps(props) {
+    componentWillReceiveProps(props:any) {
             fetch("/secured/channel/" + props.params.id, {
               credentials: 'same-origin'
             }).then((res) => {
@@ -34,7 +35,7 @@ export class Channel extends React.Component {
             });
     }
 
-    handleChange = event => {
+    handleChange = (event:any) => {
       this.setState({
         [event.target.id]: event.target.value
       });
@@ -42,7 +43,7 @@ export class Channel extends React.Component {
 
 
     render() {
-        const list = this.state.messages.map((msg) => {
+        const list = this.state.messages.map((msg:any) => {
             return <Message key={msg.id} user={this.state.users[msg.userId]} {...msg}/>
         });
         return (

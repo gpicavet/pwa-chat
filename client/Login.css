@@ -1,0 +1,17 @@
+
+.form {
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    width: 40%;
+  }
+
+.input  {
+    padding: 1em;
+    margin: 1em;
+}
+
+.button  {
+    padding: 1em;
+    margin: 1em;
+}

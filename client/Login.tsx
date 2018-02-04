@@ -1,13 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 
-export class Login extends React.Component {
+import * as Styles from './Login.css';
+
+export class Login extends React.Component<any,any> {
 
   static contextTypes = {
       router: PropTypes.object.isRequired
   }
 
-  constructor(props) {
+  constructor(props:any) {
       super(props);
       this.state = {
         form_email: "",
@@ -19,13 +21,13 @@ export class Login extends React.Component {
     return this.state.form_email.length > 0 && this.state.form_password.length > 0;
   }
 
-  handleChange = event => {
+  handleChange = (event:any) => {
     this.setState({
       [event.target.id]: event.target.value
     });
   }
 
-  handleAuth = event => {
+  handleAuth = (event:any) => {
     event.preventDefault();
     fetch("/auth", {
         method: "POST",
@@ -46,23 +48,26 @@ export class Login extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleAuth}>
+      <form onSubmit={this.handleAuth} className={Styles.form}>
         <input
           id="form_email"
           name="email"
           type="email"
           placeholder="Email"
           value={this.state.form_email}
-          onChange={this.handleChange}></input>
+          onChange={this.handleChange}
+          className={Styles.input}></input>
         <input
           id="form_password"
           name="password"
           type="password"
           placeholder="Password"
           value={this.state.form_password}
-          onChange={this.handleChange}></input>
+          onChange={this.handleChange}
+          className={Styles.input}></input>
         <button type="submit"
-          disabled={!this.validateForm()}>Validate</button>
+          disabled={!this.validateForm()}
+          className={Styles.button}>Validate</button>
       </form>
     );
   }
